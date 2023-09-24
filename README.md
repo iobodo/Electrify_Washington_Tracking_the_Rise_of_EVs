@@ -1,5 +1,20 @@
 # Electrify_Washington_Tracking_the_Rise_of_EVs
 
+--Flask
+
+A new folder called templates was created, inside you'll see the index.html page that displays the data from the database.
+The app.py file was updated to establish the connection to sqlite database and send the result of the query:
+SELECT * FROM ev_data
+
+In the index.html you can call as many fields as needed.
+
+In order to run the flask in your local environment once you've downloaded all the files, execute the below commands:
+
+export FLASK_APP=app
+flask run
+
+Then the page should be available on http://127.0.0.1:5000/
+
 --Database SQLITE 
 
 Below you can find for your reference the steps followed to create the database ElectricVehicle.db and table ev_data as well as the import of the clean CSV file:
