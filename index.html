@@ -7,29 +7,32 @@
 <body>
   <div id="content">
     <div style="height: 80vh">
-      <h1>Bar chart visualisation by state</h1>
-      <svg id="barState" width="1140px" height="500px"></svg>
+      <h1>
+        Bar chart visualisation by Cities in Washington State with more than 500
+        EVs
+      </h1>
+      <svg id="barState" width="1240px" height="500px"></svg>
     </div>
     <div style="height: 90vh; margin-bottom: 20px">
-      <h1>Bar chart visualisation by Brand</h1>
+      <h1>Bar chart visualisation by brands in Washington State</h1>
       <div class="button-section">
         <button id="ascending">Ascending</button>
         <button id="descending">Descending</button>
       </div>
-      <svg id="barMake" width="1140px" height="500px"></svg>
+      <svg id="barMake" width="1240px" height="500px"></svg>
     </div>
 
     <div style="height: 80vh">
-      <h1>Line plot visualisation by Model Year</h1>
-      <svg id="lineYear" width="1140px" height="500px"></svg>
+      <h1>Line plot visualisation by Model Year in Washington State</h1>
+      <svg id="lineYear" width="1240px" height="500px"></svg>
     </div>
 
     <div style="height: 90vh">
-      <h1>Coordinates map visualisation</h1>
+      <h1>Coordinates map visualisation of complete dataset</h1>
       <div style="color: hsl(0, 50%, 60%)">
         <h3>Zoom or pan using mouse</h3>
       </div>
-      <svg id="map" width="1140px" height="500px">
+      <svg id="map" width="1240px" height="500px">
         <g class="map"></g>
       </svg>
     </div>
@@ -70,7 +73,7 @@
     function barPlot(data, svgID, sort) {
       // set the dimensions and margins of the graph
       var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-        width = 1040 - margin.left - margin.right,
+        width = 1240 - margin.left - margin.right,
         height = 550 - margin.top - margin.bottom;
       // append the svg object to the body of the page
 
@@ -136,7 +139,7 @@
 
     function linePlot(data, svgID) {
       var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 1150 - margin.left - margin.right,
+        width = 1240 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
 
       const dataDict = Object.keys(data).map((key) => {
@@ -177,7 +180,7 @@
         .datum(dataDict)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
+        .attr("stroke-width", 3)
         .attr(
           "d",
           d3
@@ -191,8 +194,26 @@
         );
     }
 
-    const getBarPlotCountData = (data, key) => {
+    const getBarPlotCountData = (data, key, parentKey) => {
       const states = {};
+
+      if (parentKey === "State") {
+        data.forEach((evData) => {
+          const state = evData[parentKey];
+          const city = evData[key];
+          if (evData["State"] === "WA" && !Object.keys(states).includes(city)) {
+            states[city] = 1;
+          } else {
+            states[city] += 1;
+          }
+        });
+        Object.keys(states).forEach((state) => {
+          if (states[state] < 500 || !states[state]) {
+            delete states[state];
+          }
+        });
+        return states;
+      }
       data.forEach((evData) => {
         const state = evData[key];
         if (!Object.keys(states).includes(state)) {
@@ -236,11 +257,17 @@
             // }
           }
 
-          barPlot(getBarPlotCountData(result.data, "State"), "svg#barState");
-          barPlot(getBarPlotCountData(result.data, "Make"), "svg#barMake");
+          barPlot(
+            getBarPlotCountData(result.data, "City", "State"),
+            "svg#barState"
+          );
+          barPlot(
+            getBarPlotCountData(result.data, "Make", "State"),
+            "svg#barMake"
+          );
 
           linePlot(
-            getBarPlotCountData(result.data, "Model Year"),
+            getBarPlotCountData(result.data, "Model Year", "State"),
             "svg#lineYear"
           );
           plotMap(fullDataCollection);
