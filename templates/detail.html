@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>EV Models</title>
+</head>
+<body>
+    <h1>Electric Vehicle Models by {{ evmodels[0].Make }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>VIN (1-10)</th>
+                <th>County</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Model Year</th>
+                <th>Model</th>
+                <th>Electric Vehicle Type</th>
+                <th>Clean Alternative Fuel Vehicle (CAFV) Eligibility</th>
+                <th>Electric Range</th>
+                <th>DOL Vehicle ID</th>
+                <th>Vehicle Location</th>
+                <th>Electric Utility</th>
+                <th>2020 Census Tract</th>
+                <th>Lon</th>
+                <th>Lat</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for model in evmodels %}
+            <tr>
+                <td>{{ model['VIN (1-10)'] }}</td>
+                <td>{{ model['County'] }}</td>
+                <td>{{ model['City'] }}</td>
+                <td>{{ model['State'] }}</td>
+                <td>{{ model['Postal Code'] }}</td>
+                <td>{{ model['Model Year'] }}</td>
+                <td>{{ model['Model'] }}</td>
+                <td>{{ model['Electric Vehicle Type'] }}</td>
+                <td>{{ model['Clean Alternative Fuel Vehicle (CAFV) Eligibility'] }}</td>
+                <td>{{ model['Electric Range'] }}</td>
+                <td>{{ model['DOL Vehicle ID'] }}</td>
+                <td>{{ model['Vehicle Location'] }}</td>
+                <td>{{ model['Electric Utility'] }}</td>
+                <td>{{ model['2020 Census Tract'] }}</td>
+                <td>{{ model['Lon'] }}</td>
+                <td>{{ model['Lat'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+</body>
+</html>

@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>EV Models</title>
 </head>
 <body>
+    <h1>Electric Vehicle Models by Make</h1>
+    <ul>
+        {% for item in evdata %}
+        <li><a href="{{ url_for('ev_make', make=item.Make) }}">{{ item.Make }}</a></li>
+        {% endfor %}
 
-    {% for post in evdata %}
-        <div class='post'>
-            <p>{{ post['VIN (1-10)'] }}</p>
-            <p>{{ post['County'] }}</p>
-            <p>{{ post['City'] }}</p>
-            <p>{{ post['State'] }}</p>
-        </div>
-    {% endfor %}
-
+        <li><a href="{{ url_for('visualization') }}">Visualization</a></li>
+    </ul>
 </body>
 </html>
