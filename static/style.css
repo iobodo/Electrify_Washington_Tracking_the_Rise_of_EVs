@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-    background-color: #007BFF;
+    background-color: hsla(134, 89%, 47%, 0.575);
     color: white;
     padding: 20px;
     text-align: center;
@@ -29,4 +29,41 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Our Vitualization Link */
+.top-right-link {
+    position: absolute;
+    top: 50px; 
+    right: 10px; 
+    font-size: 24px; 
+    color: #421cc9; 
+    
+}
+
+/* Add a background image to the body */
+body {
+    background-image: url('/static/design_1.PNG'); 
+    background-size: cover;
+}   
+
+/* Add a background image to the body of detail.html */
+body.detail {
+    background-image: url('/static/GoGreen.PNG'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    
+}
+/* Add styles for the Home link */
+.home-link {
+    position: absolute;
+    top: 50px; 
+    left: 10px; 
+    font-size: 25px; 
+    color: #007BFF; 
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline; /* Style for hover state */
 }
