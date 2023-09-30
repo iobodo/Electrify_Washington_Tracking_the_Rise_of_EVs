@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>EV Models</title>
 </head>
-<body>
+<body class="detail">  <!-- Our backgroung image for "detail" page. We could use othe images if you guys want -->
+    <a href="{{ url_for('index') }}" class="home-link">Home</a>
+
+
     <h1>Electric Vehicle Models by {{ evmodels[0].Make }}</h1>
     <table>
         <thead>

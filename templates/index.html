@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>EV Models</title>
 </head>
 <body>
-    <h1>Electric Vehicle Models by Make</h1>
+    <h1>Electric Vehicle Models by Make in Washington </h1>
     <ul>
         {% for item in evdata %}
         <li><a href="{{ url_for('ev_make', make=item.Make) }}">{{ item.Make }}</a></li>
         {% endfor %}
 
-        <li><a href="{{ url_for('visualization') }}">Visualization</a></li>
-    </ul>
+        <li><a href="{{ url_for('visualization') }}"class="top-right-link">Visualization</a>
 </body>
 </html>
